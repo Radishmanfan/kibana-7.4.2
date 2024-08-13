@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ElasticsearchMonitorsAdapter getMonitorChartsData will provide expected filters when a location is specified 1`] = `
+Array [
+  Object {},
+  Object {
+    "body": Object {
+      "aggs": Object {
+        "timeseries": Object {
+          "aggs": Object {
+            "location": Object {
+              "aggs": Object {
+                "duration": Object {
+                  "stats": Object {
+                    "field": "monitor.duration.us",
+                  },
+                },
+                "status": Object {
+                  "terms": Object {
+                    "field": "monitor.status",
+                    "shard_size": 2,
+                    "size": 2,
+                  },
+                },
+              },
+              "terms": Object {
+                "field": "observer.geo.name",
+                "missing": "N/A",
+              },
+            },
+          },
+          "date_histogram": Object {
+            "field": "@timestamp",
+            "fixed_interval": "36000ms",
+          },
+        },
+      },
+      "query": Object {
+        "bool": Object {
+          "filter": Array [
+            Object {
+              "range": Object {
+                "@timestamp": Object {
+                  "gte": "now-15m",
+                  "lte": "now",
+                },
+              },
+            },
+            Object {
+              "term": Object {
+                "monitor.id": "fooID",
+              },
+            },
+            Object {
+              "term": Object {
+                "observer.geo.name": "Philadelphia",
+              },
+            },
+          ],
+        },
+      },
+      "size": 0,
+    },
+    "index": "heartbeat*",
+  },
+]
+`;
+
+exports[`ElasticsearchMonitorsAdapter getMonitorChartsData will run expected parameters when no location is specified 1`] = `
+Array [
+  Object {},
+  Object {
+    "body": Object {
+      "aggs": Object {
+        "timeseries": Object {
+          "aggs": Object {
+            "location": Object {
+              "aggs": Object {
+                "duration": Object {
+                  "stats": Object {
+                    "field": "monitor.duration.us",
+                  },
+                },
+                "status": Object {
+                  "terms": Object {
+                    "field": "monitor.status",
+                    "shard_size": 2,
+                    "size": 2,
+                  },
+                },
+              },
+              "terms": Object {
+                "field": "observer.geo.name",
+                "missing": "N/A",
+              },
+            },
+          },
+          "date_histogram": Object {
+            "field": "@timestamp",
+            "fixed_interval": "36000ms",
+          },
+        },
+      },
+      "query": Object {
+        "bool": Object {
+          "filter": Array [
+            Object {
+              "range": Object {
+                "@timestamp": Object {
+                  "gte": "now-15m",
+                  "lte": "now",
+                },
+              },
+            },
+            Object {
+              "term": Object {
+                "monitor.id": "fooID",
+              },
+            },
+          ],
+        },
+      },
+      "size": 0,
+    },
+    "index": "heartbeat*",
+  },
+]
+`;
+
+exports[`ElasticsearchMonitorsAdapter will return kubernetes information if contained in hits 1`] = `
+Object {
+  "downSeries": Array [],
+  "id": Object {
+    "key": "foo",
+    "url": "bar",
+  },
+  "ping": Object {
+    "@timestamp": "2018-10-30T18:51:59.800Z",
+    "container": Object {
+      "id": "container_id",
+    },
+    "kubernetes": Object {
+      "pod": Object {
+        "uid": "kubernetes_pod_uid",
+      },
+    },
+    "monitor": Object {
+      "status": "up",
+    },
+    "timestamp": "2018-10-30T18:51:59.800Z",
+  },
+  "upSeries": Array [],
+}
+`;
+
+exports[`ElasticsearchMonitorsAdapter will return filter data for each expected field 1`] = `
+Object {
+  "ids": Array [
+    "auto-http-0X728B660675AD66C2",
+    "auto-http-0XE4A3C7D7E53C51AD",
+    "auto-http-0X2E097095C06B7B4E",
+    "auto-tcp-0X7BAA5C23EED7A602",
+    "icmp-test",
+    "siem-test",
+    "auto-http-0X3F1F767F45156CB3",
+    "test-site",
+    "elatic-site",
+    "https://www.propvednik.com",
+  ],
+  "locations": Array [
+    "us-east-2",
+  ],
+  "names": Array [
+    "apm-server-dev",
+    "dev-service",
+    "kibana-dev",
+    "SecurityContents",
+    "icmp test",
+  ],
+  "ports": Array [
+    12349,
+    8200,
+    5601,
+    9200,
+    443,
+  ],
+  "schemes": Array [
+    "http",
+    "icmp",
+    "tcp",
+  ],
+  "urls": Array [
+    "http://localhost:12349",
+    "http://localhost:8200",
+    "http://localhost:5601",
+    "https://www.elastic.co/products/siem",
+    "icmp://8.8.8.8",
+    "tcp://localhost:9200",
+    "http://localhost:9200",
+    "https://www.elastic.co",
+    "https://propovednik.com",
+  ],
+}
+`;

@@ -1,0 +1,11 @@
+[[url-shortening-api]]
+== URL shortening API
+
+{kib} URLs contain the state of the application, which makes them long and cumbersome.
+Internet Explorer has URL length restrictions, and some wiki and markup parsers don't do well with the full-length version of the {kib} URL.
+
+Short URLs are designed to make sharing {kib} URLs easier.
+
+* <<shorten-url-api, Shorten URL API>>
+
+include::url_shortening/shorten_url.asciidoc[]
